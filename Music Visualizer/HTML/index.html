@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lucas Li | Music Visualizer</title>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <section id="intro" class="intro-section">
+        <div class="intro">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Music Visualizer</h1>
+                    <h4>Lucas Li</h4>
+                    <h4>Contact Information</h4>
+                        <p>E-mail: <a href="mailto: yli76@calpoly.edu">yli76@calpoly.edu</a>
+                            &ensp; Youtube: <a href="https://www.youtube.com/c/GelzoneUnsas">Gelzone Unsas</a><br/></p>
+                    <p>CPE 471 Quarter Project - Winter 2022</p>
+                    <img class="title_image" src="src/Spectrum.png" width="696" height="547"></img>
+                    <br/><br/>
+                    <a href="src/471_Demo.mp4">Demo Video</a><br/>
+                    <a href="src/Music_Visualizer.zip">Download ZIP</a>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="desc" class="desc-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="Topic">Goal</h1>
+                    <p>
+                        Make a 3D audio visualizer that reads in audio files, shows visualizations
+                        rendered with OpenGL. The visualizations will be rendered in real-time,
+                        and fade to black when it’s far from the viewport/camera.
+                    </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="overview-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1 class="Topic">Overview</h1>
+                    <h3>JUCE Implementation</h3>
+                    <p>
+                        After getting the audio sample per block from the audio file reader based on the sample rate, the ring buffer of GLfloat type can be used for the visualizer. I have set up the size of the buffer to be 10 times bigger than the expected block size for real-time use.
+                    </p>
+                    <blockquote class="code">
+                        <code>
+                        // Setup Audio Source <br>
+                        audioTransportSource.prepareToPlay (samplesPerBlockExpected, sampleRate);<br>
+                        // Setup Ring Buffer of GLfloat's for the visualizer to use<br>
+                        // Uses two channels<br>
+                        ringBuffer = new RingBuffer (2, samplesPerBlockExpected * 10);<br>
+                        </code>
+                    </blockquote>
+                    <h3>Oscilloscope</h3>
+                    <h4>Definition</h4>
+                    <p>
+                        An oscilloscope uses a two-axis graph to give a visual representation of a 
+                        waveform over time, with the horizontal axis representing time and the vertical 
+                        axis representing the amplitude. In music production, oscilloscopes are commonly 
+                        used to assist dynamics processing and sound synthesis.
+                    </p>
+                    <h4>Calculation</h4>
+                    <p>
+                        For the oscilloscope calculation, I sum up the 2 channels in the ring buffer and further
+                        pass the sample data into the shader as a uniform variable to perform amplitude 
+                        calculation which then maps to positions.
+                    </p>
+                    <p>
+                        Rendering the oscilloscope:
+                    </p>
+                    <div class="images">
+                        <img class="image" src="src/osc_not_running.png" style="width:40%"></img>
+                        <img class="image" src="src/osc_running.png" style="width:40%"></img>
+                    </div>
+                    <h3>Spectrum</h3>
+                    <h4>Definition</h4>
+                    <p>
+                        A sound spectrum displays the different frequencies present in a sound. is a representation of a 
+                        sound – usually a short sample of a sound – in terms of the amount of vibration at each individual 
+                        frequency. It is usually presented as a graph of either power or pressure as a function of frequency.
+                    </p>
+                    <h4>Calculation</h4>
+                    <p>
+                        For the spectrum calculation, Instead of summing up the 2 channels in the ring buffer, 
+                        I keep them separately for the FFT calculation to show left and right channels individually on either 
+                        half of the spectrum.
+                    </p>
+                    <blockquote class="code">
+                        <code>
+                        <bl>
+                        // Get the data from the ring buffer<br>
+                        FloatVectorOperations::add (fftData, readBuffer.getReadPointer(0, 0), RING_BUFFER_READ_SIZE);<br>
+                        FloatVectorOperations::add (fftData2, readBuffer.getReadPointer(1, 0), RING_BUFFER_READ_SIZE);<br>
+                        <br>
+                        // Calculate FFTs<br>
+                        forwardFFT.performFrequencyOnlyForwardTransform (fftData);<br>
+                        forwardFFT.performFrequencyOnlyForwardTransform (fftData2);<br>
+                        <br>
+                        // Find the range of values produced for excluding samples<br>
+                        Range maxFFTLevel = FloatVectorOperations::findMinAndMax (fftData, fftSize / 2);<br>
+                        Range maxFFTLevel2 = FloatVectorOperations::findMinAndMax (fftData2, fftSize / 2);<br>
+                    </code>
+                    </blockquote>
+                    <p>
+                        Rendering the spectrum on GL_POINTS for simplity, plan to change to a mesh for future implementation:
+                    </p>
+                    <div class="images">
+                        <img class="image" src="src/spec_not_running.png" style="width:40%"></img>
+                        <img class="image" src="src/spec_running.png" style="width:40%"></img>
+                    </div>
+                    <h3></h3>
+                    <bar />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="reference" class="reference-section">
+        <div class="container">
+            <div class="row">
+                <div class="Topic">
+                    <h1>References</h1>
+                    <a href="https://github.com/TimArt/3DAudioVisualizers">Templete Code by TimArt</a><br/>
+                    <a href="https://docs.juce.com/master/tutorial_open_gl_application.html">OpenGL - JUCE</a><br/>
+                    <a href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Audio player - JUCE</a><br/>
+                    <a href="https://newt.phys.unsw.edu.au/jw/sound.spectrum.html">What is a sound spectrum</a><br/>
+                    <a href="https://www.musicradar.com/tuition/tech/what-is-an-oscilloscope-601111#:~:text=An%20oscilloscope%20uses%20a%20two,dynamics%20processing%20and%20sound%20synthesis.">What is an oscilloscope</a><br/>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

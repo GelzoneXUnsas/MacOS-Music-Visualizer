@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="p35dNt" name="Music Visualizer" projectType="guiapp" useAppConfig="1"
+              addUsingNamespaceToJuceHeader="1" displaySplashScreen="1" jucerFormatVersion="1"
+              defines="JUCE_MODAL_LOOPS_PERMITTED=1">
+  <MAINGROUP id="wRSgY8" name="Music Visualizer">
+    <GROUP id="{748F6609-A025-4F1D-356C-6422B9BD5789}" name="Source">
+      <FILE id="p2GxDv" name="Oscilloscope2D.h" compile="0" resource="0"
+            file="Source/Oscilloscope2D.h"/>
+      <FILE id="Cx0GTA" name="Oscilloscope3D.h" compile="0" resource="0"
+            file="Source/Oscilloscope3D.h"/>
+      <FILE id="w98zlO" name="RingBuffer.h" compile="0" resource="0" file="Source/RingBuffer.h"/>
+      <FILE id="dUMx3B" name="Spectrum.h" compile="0" resource="0" file="Source/Spectrum.h"/>
+      <FILE id="exxOHl" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="kArkiJ" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="MZlEu1" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="Music Visualizer"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="Music Visualizer"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_analytics" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_box2d" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_osc" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_product_unlocking" path="../../../../Library/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../../../../Library/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_analytics" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_box2d" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_product_unlocking" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+</JUCERPROJECT>

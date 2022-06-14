@@ -23,6 +23,7 @@
 ## About The Project
 A 3D audio visualizer that reads in audio files, shows visualizations rendered with OpenGL. The visualizations will be rendered in real-time, and fade to black when it’s far from the viewport/camera.<br /><br />
 [![Visualizer Preview](https://github.com/GelzoneXUnsas/MacOS-Music-Visualizer/blob/main/Music%20Visualizer/HTML/src/Spectrum.png?raw=true)](https://drive.google.com/file/d/11BHjdlza270u0R0LCiln8Ry4DRV38nZ6/view?usp=sharing)
+  * Click on the image above for Demo
 
 ## Overview
 #### JUCE Implementation
